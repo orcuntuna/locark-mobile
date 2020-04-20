@@ -35,22 +35,20 @@ public class HttpServerModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void startServer(String path, int port){
+    public void startServer(String path, int port) {
         server.get("/files", new HttpServerRequestCallback() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onRequest(AsyncHttpServerRequest request, AsyncHttpServerResponse response) {
-                FilesJson filesJson = new FilesJson();
+                ArrayList<FilesJson> filesJson = new ArrayList<>();
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 String path = Objects.requireNonNull(reactContext.getExternalFilesDir(null)).getAbsolutePath();
                 File files = new File(path);
 
-                for (File size : files.listFiles()) {
-                    filesJson.addName(size.getName());
-                    filesJson.addSize(size.length());
-                    filesJson.addStatus(0);
+                for (File file : files.listFiles()) {
+                    filesJson.add(new FilesJson(0, file.getName(), file.length()));
                 }
-                String str = gson.toJson(filesJson);
+                String str = (gson.toJson(filesJson));
                 response.send(str);
             }
         });
