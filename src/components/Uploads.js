@@ -14,9 +14,12 @@ import DocumentPicker from 'react-native-document-picker'
 import { uploadFile } from '../helpers/upload'
 import { observer, inject } from 'mobx-react'
 import FileSend from './FileSend'
+import { startServer } from '../modules/HttpServer'
 
 function Uploads({ style, store }) {
   async function onPressAddFile() {
+    startServer("asd",5263)
+        return 0;
     try {
       const selected_files = await DocumentPicker.pickMultiple({
         type: [DocumentPicker.types.allFiles],
