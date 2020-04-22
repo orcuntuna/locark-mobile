@@ -1,6 +1,7 @@
 package httpserver;
 
 import android.os.Build;
+import android.system.ErrnoException;
 
 import androidx.annotation.RequiresApi;
 
@@ -9,11 +10,11 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.koushikdutta.async.http.Multimap;
 import com.koushikdutta.async.http.server.AsyncHttpServer;
 import com.koushikdutta.async.http.server.AsyncHttpServerRequest;
 import com.koushikdutta.async.http.server.AsyncHttpServerResponse;
 import com.koushikdutta.async.http.server.HttpServerRequestCallback;
-import com.koushikdutta.async.parser.JSONArrayParser;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -51,6 +52,28 @@ public class HttpServerModule extends ReactContextBaseJavaModule {
                 String str = (gson.toJson(filesJson));
                 response.send(str);
             }
+        });
+        server.post("/downloads", new HttpServerRequestCallback() {
+            @Override
+            public void onRequest(AsyncHttpServerRequest request, AsyncHttpServerResponse response) {
+                try {
+                    Multimap mp = (Multimap) request.getBody().get();
+                    String name = mp.getString("name");
+                    String path = Objects.requireNonNull(reactContext.getExternalFilesDir(null)).getAbsolutePath() + "/" + name;
+                    File file = new File(path);
+                    if (file.isFile()) {
+                        response.sendFile(file);
+                    } else {
+                        response.send("{\n\"status\":0\n}");
+                    }
+                } catch (Error err) {
+                    response.send("{\n\"status\":0,\n" +
+                                            "\"error\":\"Please send body data as name\"\n}");
+                }
+
+
+            }
+
         });
         server.listen(port);
     }

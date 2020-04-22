@@ -19,7 +19,6 @@ import { startServer } from '../modules/HttpServer'
 function Uploads({ style, store }) {
   async function onPressAddFile() {
     startServer("asd",5263)
-        return 0;
     try {
       const selected_files = await DocumentPicker.pickMultiple({
         type: [DocumentPicker.types.allFiles],

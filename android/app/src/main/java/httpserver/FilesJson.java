@@ -1,6 +1,5 @@
 package httpserver;
 
-import java.util.ArrayList;
 
 public class FilesJson {
     int status;
