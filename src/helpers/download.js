@@ -1,5 +1,4 @@
-import axios from 'react-native-axios'
-import a from 'axi'
+
 import fs,{downloadFile} from 'react-native-fs';
 
 const downloadFiles = (ip, port, name) => {

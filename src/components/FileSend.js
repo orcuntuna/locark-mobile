@@ -22,7 +22,8 @@ function FileSend({ style, data }) {
           {data.name}
         </Text>
         <Text style={styles.size} numberOfLines={1}>
-          {fileSizeConvert(data.size)}
+          {/*{fileSizeConvert(data.size)}*/}
+          {data.status}
         </Text>
       </View>
       <TouchableOpacity
