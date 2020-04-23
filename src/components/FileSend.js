@@ -1,8 +1,15 @@
 import React from 'react'
-import { Text, StyleSheet, View, TouchableOpacity, Alert } from 'react-native'
+import {
+  Text,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Alert,
+  ActivityIndicator,
+} from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
 import { fileSizeConvert } from '../helpers/file'
-import {  deleteFile } from '../helpers/upload';
+import { deleteFile } from '../helpers/upload'
 
 function FileSend({ style, data }) {
   function onPressDelete() {
@@ -22,17 +29,20 @@ function FileSend({ style, data }) {
           {data.name}
         </Text>
         <Text style={styles.size} numberOfLines={1}>
-          {/*{fileSizeConvert(data.size)}*/}
-          {data.status}
+          {fileSizeConvert(data.size)}
         </Text>
       </View>
-      <TouchableOpacity
-        onPress={() => onPressDelete()}
-        style={styles.button}
-        activeOpacity={0.6}
-      >
-        <Icon name={'trash-2'} size={18} color={'#555'} />
-      </TouchableOpacity>
+      {data.status === 1 ? (
+        <TouchableOpacity
+          onPress={() => onPressDelete()}
+          style={styles.button}
+          activeOpacity={0.6}
+        >
+          <Icon name={'trash-2'} size={18} color={'#555'} />
+        </TouchableOpacity>
+      ) : (
+        <ActivityIndicator size={'small'} color={'#666'} />
+      )}
     </View>
   )
 }
