@@ -11,6 +11,7 @@ const uploadFile = (file) => {
         .catch((err) => {
             console.log(err.message, err.code);
         });
+
 };
 
 const deleteFile = (file) => {

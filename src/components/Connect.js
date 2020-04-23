@@ -7,13 +7,19 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native'
+import {downloadFiles} from '../helpers/download'
 
-function Connect({ style }) {
+const onPressDownloadFile = () => {
+  downloadFiles("192.168.1.33", "5263", "")
+}
+
+function Connect({style}) {
   return (
-    <View style={[styles.connect, { ...style }]}>
-      <TextInput style={styles.input} placeholder={'Connection PIN'} />
+    <View style={[styles.connect, {...style}]}>
+      <TextInput style={styles.input} placeholder={'Connection PIN'}/>
       <TouchableOpacity style={styles.button} activeOpacity={0.7}>
-        <Text style={styles.buttonText}>Connect</Text>
+        <Text style={styles.buttonText}
+              onPress={() => onPressDownloadFile()}>Connect</Text>
       </TouchableOpacity>
     </View>
   )

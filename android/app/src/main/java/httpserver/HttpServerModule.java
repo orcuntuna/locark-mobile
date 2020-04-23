@@ -16,6 +16,9 @@ import com.koushikdutta.async.http.server.AsyncHttpServerRequest;
 import com.koushikdutta.async.http.server.AsyncHttpServerResponse;
 import com.koushikdutta.async.http.server.HttpServerRequestCallback;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -53,12 +56,13 @@ public class HttpServerModule extends ReactContextBaseJavaModule {
                 response.send(str);
             }
         });
-        server.post("/downloads", new HttpServerRequestCallback() {
+        server.get("/downloads", new HttpServerRequestCallback() {
             @Override
             public void onRequest(AsyncHttpServerRequest request, AsyncHttpServerResponse response) {
+                System.out.println(request.getQuery().getString("name"));
+                System.out.println("buraya girdi");
                 try {
-                    Multimap mp = (Multimap) request.getBody().get();
-                    String name = mp.getString("name");
+                    String name = request.getQuery().getString("name");
                     String path = Objects.requireNonNull(reactContext.getExternalFilesDir(null)).getAbsolutePath() + "/" + name;
                     File file = new File(path);
                     if (file.isFile()) {
@@ -68,10 +72,8 @@ public class HttpServerModule extends ReactContextBaseJavaModule {
                     }
                 } catch (Error err) {
                     response.send("{\n\"status\":0,\n" +
-                                            "\"error\":\"Please send body data as name\"\n}");
+                            "\"error\":\"Please send body data as name\"\n}");
                 }
-
-
             }
 
         });

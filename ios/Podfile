@@ -79,6 +79,7 @@ target 'locark' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+
   target 'locarkTests' do
     inherit! :complete
     # Pods for testing
