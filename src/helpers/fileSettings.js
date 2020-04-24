@@ -6,9 +6,8 @@ const fileSizeConvert = (size) => {
     return `${(size / 1048576).toFixed(2)} mb`
   } else if (size > 1024) {
     return `${(size / 1024).toFixed(2)} kb`
-  } else {
-    return `${size} byte`
   }
+  return `${size} byte`
 }
 
 export {fileIcon, fileSizeConvert}
