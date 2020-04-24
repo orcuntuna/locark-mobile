@@ -9,15 +9,15 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
 
-function MyPin({ style }) {
+function MyPin({style}) {
   return (
-    <View style={[styles.connect, { ...style }]}>
-      <TextInput style={styles.input} editable={false} value={'JKSALY'} />
+    <View style={[styles.connect, {...style}]}>
+      <TextInput style={styles.input} editable={false} value={'JKSALY'}/>
       <TouchableOpacity
         style={styles.button}
         activeOpacity={0.7}
       >
-        <Icon style={styles.icon} name={'camera'} size={20} color={'#333'} />
+        <Icon style={styles.icon} name={'camera'} size={20} color={'#333'}/>
       </TouchableOpacity>
     </View>
   )

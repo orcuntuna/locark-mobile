@@ -11,12 +11,12 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
 import DocumentPicker from 'react-native-document-picker'
-import { uploadFile } from '../helpers/upload'
-import { observer, inject } from 'mobx-react'
+import {uploadFile} from '../helpers/upload'
+import {observer, inject} from 'mobx-react'
 import FileSend from './FileSend'
-import { startServer } from '../modules/HttpServer'
+import {startServer} from '../modules/HttpServer'
 
-function Uploads({ style, store }) {
+function Uploads({style, store}) {
   async function onPressAddFile() {
     startServer('asd', 5263)
     try {
@@ -32,7 +32,7 @@ function Uploads({ style, store }) {
           store.uploads.add_upload_item(file)
           uploadFile(file)
         } else {
-          ToastAndroid.show(file.name + ' already selected', ToastAndroid.SHORT)
+          ToastAndroid.show(`${file.name} already selected`, ToastAndroid.SHORT)
         }
       }
     } catch (err) {
@@ -44,20 +44,20 @@ function Uploads({ style, store }) {
   }
 
   return (
-    <View style={[styles.uploads, { ...style }]}>
+    <View style={[styles.uploads, {...style}]}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Your shared files</Text>
         <TouchableOpacity
           style={styles.headerButton}
           onPress={() => onPressAddFile()}
         >
-          <Icon name={'plus'} size={24} color={'#FFF'} />
+          <Icon name={'plus'} size={24} color={'#FFF'}/>
         </TouchableOpacity>
       </View>
       <ScrollView style={styles.list}>
         {store.uploads.uploads_list.length ? (
           store.uploads.uploads_list.map((item, index) => (
-            <FileSend key={'filesend-' + index} data={item} />
+            <FileSend key={`filesend- ${index}`} data={item}/>
           ))
         ) : (
           <Text style={styles.message}>You haven't added a file yet.</Text>

@@ -8,22 +8,23 @@ import {
   ActivityIndicator,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
-import { fileSizeConvert } from '../helpers/file'
-import { deleteFile } from '../helpers/upload'
+import {fileSizeConvert} from '../helpers/fileSettings'
+import {deleteFile} from '../helpers/upload'
 
-function FileSend({ style, data }) {
+function FileSend({style, data}) {
   function onPressDelete() {
     Alert.alert(
       'Warning',
       'Remove file from list?',
-      [{ text: 'Cancel' }, { text: 'Delete', onPress: () => deleteFile(data) }],
+      [{text: 'Cancel'}, {text: 'Delete', onPress: () => deleteFile(data)}],
       {
         cancelable: true,
       },
     )
   }
+
   return (
-    <View style={[styles.file, { ...style }]}>
+    <View style={[styles.file, {...style}]}>
       <View style={styles.info}>
         <Text style={styles.name} numberOfLines={1}>
           {data.name}
@@ -38,10 +39,10 @@ function FileSend({ style, data }) {
           style={styles.button}
           activeOpacity={0.6}
         >
-          <Icon name={'trash-2'} size={18} color={'#555'} />
+          <Icon name={'trash-2'} size={18} color={'#555'}/>
         </TouchableOpacity>
       ) : (
-        <ActivityIndicator size={'small'} color={'#666'} />
+        <ActivityIndicator size={'small'} color={'#666'}/>
       )}
     </View>
   )

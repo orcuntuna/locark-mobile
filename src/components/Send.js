@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, StyleSheet, StatusBar, View } from 'react-native'
+import {Text, StyleSheet, StatusBar, View} from 'react-native'
 import MyPin from './MyPin'
 import Uploads from './Uploads'
 
@@ -8,8 +8,8 @@ function Send() {
     <View style={styles.container}>
       <Text style={styles.h1}>Send Files</Text>
       <Text style={styles.h2}>on computers or phones</Text>
-      <MyPin style={styles.connect} />
-      <Uploads style={styles.uploads} />
+      <MyPin style={styles.connect}/>
+      <Uploads style={styles.uploads}/>
     </View>
   )
 }

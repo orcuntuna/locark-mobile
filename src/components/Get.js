@@ -13,7 +13,7 @@ function Get() {
     <View style={styles.container}>
       <Text style={styles.h1}>Get Files</Text>
       <Text style={styles.h2}>on computers or phones</Text>
-      <Connect style={styles.connect} />
+      <Connect style={styles.connect}/>
       <Text style={styles.h3}>
         To transfer files, you must be connected to the same network.
       </Text>

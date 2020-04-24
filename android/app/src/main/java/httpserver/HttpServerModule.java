@@ -80,4 +80,8 @@ public class HttpServerModule extends ReactContextBaseJavaModule {
         server.listen(port);
     }
 
+    @ReactMethod
+    public void stopServer(){
+        server.stop();
+    }
 }

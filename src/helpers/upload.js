@@ -3,7 +3,7 @@ import UploadStore from '../stores/UploadsStore'
 
 const uploadFile = (file) => {
   const sourcePath = file.uri
-  const path = fs.ExternalDirectoryPath + '/' + file.name
+  const path = `${fs.ExternalDirectoryPath}/${file.name}`
   fs.copyFile(sourcePath, path)
     .then((success) => {
       UploadStore.change_status(file.name, 1)
@@ -14,22 +14,21 @@ const uploadFile = (file) => {
 }
 
 const deleteFile = (file) => {
-  const path = fs.ExternalDirectoryPath + '/' + file.name
+  const path = `${fs.ExternalDirectoryPath}/${file.name}`
   fs.unlink(path)
     .then((success) => {
-      // return değeri bilecek
-      console.log('FILE DELETE!')
+      UploadStore.delete(file.name);
+      console.log('FILE DELETE!');
     })
     .catch((err) => {
-      console.log(err.message, err.code)
+      console.log(err.message, err.code);
     })
 }
 
-const deleteAllFiles = (files) => {
-  const path = fs.ExternalDirectoryPath + '/'
+const deleteAllFiles = () => {
+  const path = `${fs.ExternalDirectoryPath}/`
   fs.unlink(path)
     .then((success) => {
-      // return değeri bilecek
       console.log('FILES DELETE!')
     })
     .catch((err) => {
@@ -37,4 +36,4 @@ const deleteAllFiles = (files) => {
     })
 }
 
-export { uploadFile, deleteFile, deleteAllFiles }
+export {uploadFile, deleteFile, deleteAllFiles}
